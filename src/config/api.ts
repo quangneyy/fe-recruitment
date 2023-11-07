@@ -113,7 +113,9 @@ export const callFetchJob = (query: string) => {
 export const callFetchJobById = (id: string) => {
     return axios.get<IBackendRes<IJob>>(`/api/v1/jobs/${id}`);
 }
-
+export const callFetchJobByCompany = (id: string) => {
+    return axios.get<IBackendRes<IJob[]>>(`/api/v1/jobs/findAllJobByCompany/${id}`);
+}
 /**
  * 
 Module Resume

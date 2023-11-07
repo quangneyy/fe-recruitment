@@ -91,6 +91,7 @@ const ClientJobDetailPage = (props: any) => {
                                         {jobDetail.company?.name}
                                     </div>
                                 </div>
+                                
                             </Col>
                         </>
                     }

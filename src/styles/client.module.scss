@@ -304,4 +304,45 @@
         width: 100%;
         align-items: center;
     }
+    .job-list-title {
+        font-size: 24px;
+        color: #333;
+        font-weight: bold;
+        margin-bottom: 10px;
+        margin-left: 300px;
+        padding-top: 300px;
+    }
+    .job-list {
+        padding-top: 0;
+        max-height: 850px; /* Đặt kích thước cố định cho danh sách công việc */
+        overflow-y: auto; /* Tạo thanh cuộn khi nội dung vượt quá kích thước */
+        margin-left: 300px;
+        width:500px;
+      }
+    .job-container {
+        
+        padding-top: 0;
+        padding-bottom: 20px; /* Đặt khoảng cách giữa mỗi công việc */
+        background-color: #fff4e9; /* Đặt màu nền là màu vàng */
+      }
+      .company-logo {
+        max-width: 100px; // Điều chỉnh kích thước tối đa của logo
+        max-height: 100px; // Điều chỉnh kích thước tối đa của logo theo chiều cao (tùy chọn)
+      }
+      /* Trong tệp CSS của bạn hoặc sử dụng tệp CSS-in-JS */
+    .red-border {
+    border: 1px solid #ffdfdf; /* Đây là viền màu đỏ */
+    margin: 10px; /* Thêm khoảng cách giữa các công việc nếu cần */
+}
+.company-info {
+    padding-top: 50px;
+    display: flex;
+    align-items: center;
+    /* Thiết lập hiển thị theo hàng ngang và căn giữa nội dung */
+}
+
+.company-info img {
+    margin-right: 30px; /* Khoảng cách giữa logo và tên công ty */
+}
+
 }
