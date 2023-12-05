@@ -1,4 +1,4 @@
-import { Breadcrumb, Col, ConfigProvider, Divider, Form, Row, message, notification } from "antd";
+import { Breadcrumb, Col, ConfigProvider, Divider, Form, Row, message, notification, Button } from "antd";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { DebounceSelect } from "../user/debouce.select";
 import { FooterToolbar, ProForm, ProFormDatePicker, ProFormDigit, ProFormSelect, ProFormSwitch, ProFormText } from "@ant-design/pro-components";
@@ -13,6 +13,7 @@ import { CheckSquareOutlined } from "@ant-design/icons";
 import enUS from 'antd/lib/locale/en_US';
 import dayjs from 'dayjs';
 import { IJob } from "@/types/backend";
+import Modal from "antd/es/modal/Modal";
 
 const ViewUpsertJob = (props: any) => {
     const [companies, setCompanies] = useState<ICompanySelect[]>([]);
@@ -25,6 +26,7 @@ const ViewUpsertJob = (props: any) => {
     const id = params?.get("id"); // job id
     const [dataUpdate, setDataUpdate] = useState<IJob | null>(null);
     const [form] = Form.useForm();
+    const [showPopup, setShowPopup] = useState(false);
 
     useEffect(() => {
         const init = async () => {
@@ -123,6 +125,14 @@ const ViewUpsertJob = (props: any) => {
                 startDate: dayjs(values.startDate, 'DD/MM/YYYY').toDate(),
                 endDate: dayjs(values.endDate, 'DD/MM/YYYY').toDate(),
                 isActive: values.isActive
+            }
+
+            // Show popup and redirect to payment
+            try {
+                setShowPopup(true);
+                return;
+            } catch (err) {
+                console.error(err);
             }
 
             const res = await callCreateJob(job);
@@ -333,6 +343,27 @@ const ViewUpsertJob = (props: any) => {
                 </ConfigProvider>
 
             </div>
+            <Modal
+                title="Payment Information"
+                visible={showPopup}
+                footer={null}
+                closable={false}
+                bodyStyle={{ textAlign: 'center' }} // Center-align content
+                onCancel={() => setShowPopup(false)}  // Set onCancel handler
+            >
+                <p>Bạn sẽ trả 30.000đ khi tạo một công việc mới.</p>
+                <Button type="default" onClick={() => setShowPopup(false)} style={{ marginRight: '8px' }}>
+                    Huỷ
+                </Button>
+                <Button type="primary" onClick={() => navigate('/admin/payment')}>
+                    Đồng ý
+                </Button>
+            </Modal>
+            {/* <Modal title="Payment Information" visible={showPopup} footer={null} closable={false}>
+                <p>You will be charged $5 for creating a new job.</p>
+                <button onClick={() => setShowPopup(false)}>Cancel</button>
+                <button onClick={() => navigate('/admin/payment')}>Confirm</button>
+            </Modal> */}
         </div>
     )
 }

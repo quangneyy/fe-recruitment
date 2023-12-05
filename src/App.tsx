@@ -30,6 +30,7 @@ import ClientJobPage from './pages/job';
 import ClientJobDetailPage from './pages/job/detail';
 import ClientCompanyPage from './pages/company';
 import ClientCompanyDetailPage from './pages/company/detail';
+import PaymentPage from './pages/admin/payment';
 
 const LayoutClient = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -142,7 +143,14 @@ export default function App() {
             <ProtectedRoute>
               <RolePage />
             </ProtectedRoute>
-        }
+        },
+        {
+          path: "payment",
+          element:
+            <ProtectedRoute>
+              <PaymentPage />
+            </ProtectedRoute>
+        },
       ],
     },
 
