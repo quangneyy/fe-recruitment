@@ -1,3 +1,5 @@
+/* Thêm vào file CSS hoặc module CSS của bạn */
+
 .footer {
   display: flex;
   justify-content: center;
@@ -12,7 +14,6 @@
   padding: 30px;
   border-radius: 8px;
   background-color: #222831;
-  background-image: linear-gradient(#222831);
   width: 100%;
   color: white;
 }
@@ -24,34 +25,33 @@
 
 .col {
   flex: 1;
-  padding: 20px; /* Thêm padding cho cột */
+  padding: 20px;
 }
 
-.linkBox{
+.linkBox {
   text-transform: capitalize;
-  padding: 20px; /* Thêm padding cho link-box */
+  padding: 20px;
 }
 
-.linkBoxTitle{
-  
-  font-size: 22px; /* Tăng kích thước font chữ */
-  line-height: 1.5; /* Khoảng cách dòng */
+.linkBoxTitle {
+  font-size: 22px;
+  line-height: 1.5;
   font-family: "Roboto", sans-serif;
-  color: var(--link-color);
+  color: #ffffff;
   margin-bottom: 10px;
 }
 
-.linkBoxLink{
-  font-size: 17px; /* Giảm kích thước font chữ */
-  line-height: 1.2; /* Khoảng cách dòng */
+.linkBoxLink {
+  font-size: 17px;
+  line-height: 1.2;
   font-family: "Roboto", sans-serif;
-  color: var(--link-color);
+  color: #84849d;
   margin-bottom: 10px;
   cursor: pointer;
   transition: 300ms all ease-in-out;
 
   &:hover {
-    color: #ffffff; /* Thay đổi màu chữ khi hover */
+    color: #ffffff;
   }
 }
 
@@ -60,14 +60,14 @@
   line-height: 1.5;
   margin-top: 20px;
   font-family: "Roboto", sans-serif;
+  color: #84849d;
 }
 
 .privacyBox,
 .socialMediaBox {
-  color: #84849d;
   font-size: 14px;
+  color: #84849d;
   margin-top: 0px;
-  
 }
 
 .seprator {
@@ -77,45 +77,37 @@
 }
 
 .inputBox {
-  border: 1px solid var(--input-border-color);
+  display: flex;
+  align-items: center;
+  border: 1px solid #84849d;
   padding: 10px;
   margin-top: 20px;
   width: 100%;
   border-radius: 5px;
-  display: flex;
-  align-items: center;
-  
-  
-
-  svg {
-    margin-top: 3px;
-    margin-right: 0px;
-    width: 0;
-  }
 
   input {
     flex: 1;
     border: none;
-    padding: 5px;
+    padding: 10px;
     font-size: 16px;
     border-radius: 5px;
     outline: none;
-    margin-right: 10px;
-    
 
     &::placeholder {
-      font-size: 16px;
+      color: #84849d;
     }
   }
 }
 
 .subscribeButton {
   margin-top: 20px;
+  margin-left: 50px;
+  margin-bottom: 20px;
   color: white;
   width: 100%;
   text-align: center;
   background: linear-gradient(to right, #8bcdff, #6487ff);
-  padding: 15px;
+  padding: 10px;
   border-radius: 5px;
   outline: none;
   border: none;

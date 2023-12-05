@@ -1,9 +1,7 @@
 import React from 'react';
-import footerStyles from 'styles/footer.module.scss'; // Thay đổi đường dẫn tùy thuộc vào cách bạn tổ chức file của mình
-import { CiPhone } from "react-icons/ci";
-import { MdOutlineEmail } from "react-icons/md";
-// import { PiPaperPlaneTilt } from "react-icons/md";
-
+import footerStyles from 'styles/footer.module.scss';
+import { CiPhone } from 'react-icons/ci';
+import { MdOutlineEmail } from 'react-icons/md';
 
 export default function App() {
   return (
@@ -13,12 +11,15 @@ export default function App() {
           <div className={`${footerStyles.col} ${footerStyles.colLg3}`}>
             <div className={footerStyles.linkBox}>
               <div className={footerStyles.linkBoxTitle}>Liên hệ để đăng tin tuyển dụng tại:</div>
-              <div className={footerStyles.linkBoxLink}><CiPhone /> Hồ Chí Minh: (+84) 977 460 519</div>
-              <div className={footerStyles.linkBoxLink}><CiPhone /> Hà Nội: (+84) 983 131 351</div>
-              <div className={footerStyles.linkBoxLink}><MdOutlineEmail /> Email: love@itviec.com</div>
-              {/* <div className={footerStyles.linkBoxLink}><PiPaperPlaneTilt /> Gửi thông tin liên hệ</div> */}
-
-
+              <div className={footerStyles.linkBoxLink}>
+                <CiPhone /> Hồ Chí Minh: (+84) 977 460 519
+              </div>
+              <div className={footerStyles.linkBoxLink}>
+                <CiPhone /> Hà Nội: (+84) 983 131 351
+              </div>
+              <div className={footerStyles.linkBoxLink}>
+                <MdOutlineEmail /> Email: love@itviec.com
+              </div>
             </div>
           </div>
           <div className={`${footerStyles.col} ${footerStyles.colLg3}`}>
@@ -45,16 +46,13 @@ export default function App() {
             <div className={footerStyles.linkBox}>
               <div className={footerStyles.linkBoxTitle}>Tin Tức</div>
               <div className={footerStyles.linkBoxSubscribeDescription}>
-                Đăng ký nhận bản tin của chúng tôi để nhận được tin tức hàng tuần của bạn,
+                Đăng ký nhận bản tin của chúng tôi để nhận được tin tức hàng tuần,
                 cập nhật, thủ thuật và ưu đãi đặc biệt.
               </div>
               <div className={footerStyles.inputBox}>
-                <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="51" height="43.667" viewBox="0 0 51 43.667">
-                  {/* ... (SVG content) */}
-                </svg>
-                <input type="text" placeholder="Enter your email address" />
+                <input type="text" placeholder="Nhập địa chỉ email của bạn" />
+                <button className={footerStyles.subscribeButton}>Subscribe</button>
               </div>
-              <button className={footerStyles.subscribeButton}>Subscribe</button>
             </div>
           </div>
         </div>

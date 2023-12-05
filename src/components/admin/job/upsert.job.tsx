@@ -1,4 +1,4 @@
-import { Breadcrumb, Col, ConfigProvider, Divider, Form, Row, message, notification } from "antd";
+import { Breadcrumb, Col, ConfigProvider, Divider, Form, Row, message, notification, Button } from "antd";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { DebounceSelect } from "../user/debouce.select";
 import { FooterToolbar, ProForm, ProFormDatePicker, ProFormDigit, ProFormSelect, ProFormSwitch, ProFormText } from "@ant-design/pro-components";
@@ -13,12 +13,15 @@ import { CheckSquareOutlined } from "@ant-design/icons";
 import enUS from 'antd/lib/locale/en_US';
 import dayjs from 'dayjs';
 import { IJob } from "@/types/backend";
+import Modal from "antd/es/modal/Modal";
 
 const ViewUpsertJob = (props: any) => {
     const [companies, setCompanies] = useState<ICompanySelect[]>([]);
 
     const navigate = useNavigate();
     const [value, setValue] = useState<string>("");
+
+    const [showPopup, setShowPopup] = useState(false);
 
     let location = useLocation();
     let params = new URLSearchParams(location.search);
@@ -124,6 +127,8 @@ const ViewUpsertJob = (props: any) => {
                 endDate: dayjs(values.endDate, 'DD/MM/YYYY').toDate(),
                 isActive: values.isActive
             }
+
+
 
             const res = await callCreateJob(job);
             if (res.data) {
@@ -333,6 +338,23 @@ const ViewUpsertJob = (props: any) => {
                 </ConfigProvider>
 
             </div>
+
+            <Modal
+                title="Payment Information"
+                visible={showPopup}
+                footer={null}
+                closable={false}
+                bodyStyle={{ textAlign: 'center' }} // Center-align content
+                onCancel={() => setShowPopup(false)}  // Set onCancel handler
+            >
+                <p>You will be charged $5 for creating a new job.</p>
+                <Button type="default" onClick={() => setShowPopup(false)} style={{ marginRight: '8px' }}>
+                    Cancel
+                </Button>
+                <Button type="primary" onClick={() => navigate('/admin/payment')}>
+                    Confirm
+                </Button>
+            </Modal>
         </div>
     )
 }
