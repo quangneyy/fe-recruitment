@@ -21,13 +21,12 @@ const ViewUpsertJob = (props: any) => {
     const navigate = useNavigate();
     const [value, setValue] = useState<string>("");
 
-    const [showPopup, setShowPopup] = useState(false);
-
     let location = useLocation();
     let params = new URLSearchParams(location.search);
     const id = params?.get("id"); // job id
     const [dataUpdate, setDataUpdate] = useState<IJob | null>(null);
     const [form] = Form.useForm();
+    const [showPopup, setShowPopup] = useState(false);
 
     useEffect(() => {
         const init = async () => {
@@ -128,7 +127,13 @@ const ViewUpsertJob = (props: any) => {
                 isActive: values.isActive
             }
 
-
+            // Show popup and redirect to payment
+            try {
+                setShowPopup(true);
+                return;
+            } catch (err) {
+                console.error(err);
+            }
 
             const res = await callCreateJob(job);
             if (res.data) {
@@ -347,12 +352,12 @@ const ViewUpsertJob = (props: any) => {
                 bodyStyle={{ textAlign: 'center' }} // Center-align content
                 onCancel={() => setShowPopup(false)}  // Set onCancel handler
             >
-                <p>You will be charged $5 for creating a new job.</p>
+                <p>Bạn sẽ trả 30.000đ khi tạo một công việc mới.</p>
                 <Button type="default" onClick={() => setShowPopup(false)} style={{ marginRight: '8px' }}>
-                    Cancel
+                    Huỷ
                 </Button>
                 <Button type="primary" onClick={() => navigate('/admin/payment')}>
-                    Confirm
+                    Đồng ý
                 </Button>
             </Modal>
         </div>
