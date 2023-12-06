@@ -46,7 +46,6 @@ const CompanyCard = (props: IProps) => {
         setIsLoading(false)
     }
 
-
     const handleOnchangePage = (pagination: { current: number, pageSize: number }) => {
         if (pagination && pagination.current !== current) {
             setCurrent(pagination.current)
