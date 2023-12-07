@@ -31,6 +31,7 @@ import ClientJobDetailPage from './pages/job/detail';
 import ClientCompanyPage from './pages/company';
 import ClientCompanyDetailPage from './pages/company/detail';
 import PaymentPage from './pages/admin/payment';
+import PaymentPaySuccess from './pages/admin/paymentsuccess';
 
 const LayoutClient = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -151,9 +152,15 @@ export default function App() {
               <PaymentPage />
             </ProtectedRoute>
         },
+        {
+          path: "success",
+          element:
+            <ProtectedRoute>
+              <PaymentPaySuccess />
+            </ProtectedRoute>
+        },
       ],
     },
-
 
     {
       path: "/login",

@@ -10,6 +10,7 @@ const PaymentPay: React.FC = () => {
             encType="application/x-www-form-urlencoded"
         >
             <input type="hidden" name="price" value="30000" />
+            <input type="hidden" name="resultURL" value='http://localhost:3000/admin/success' />
             <button
                 className="btn mt-4"
                 type="submit"
@@ -27,6 +28,9 @@ const PaymentPay: React.FC = () => {
             >
                 Thanh toán tại đây
             </button>
+            {/* <Button type="primary" onClick={() => navigate('/admin/payment')}>
+                Đồng ý
+            </Button> */}
         </form>
     );
 };
