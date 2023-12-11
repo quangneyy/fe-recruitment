@@ -45,7 +45,6 @@ const LoginPage = () => {
         }
     };
 
-
     return (
         <div className={styles["login-page"]}>
             <main className={styles.main}>
