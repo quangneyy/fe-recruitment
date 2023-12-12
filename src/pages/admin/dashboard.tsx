@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Card, Col, Row, Statistic, Divider, Pagination } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import CountUp from 'react-countup';
-import { callFetchCompany } from '@/config/api';
+import { callFetchCompany, callFetchUser, callFetchJob } from '@/config/api';
 import { ICompany } from '@/types/backend';
 import styles from 'styles/client.module.scss';
 
@@ -12,16 +12,39 @@ const DashboardPage = () => {
     const navigate = useNavigate();
     const [current, setCurrent] = useState(1);
     const [pageSize, setPageSize] = useState(8);
-    const [total, setTotal] = useState(0);
+    const [totalCompanies, setTotalCompanies] = useState(0);
+    const [totalUsers, setTotalUsers] = useState(0);
+    const [totalJobs, setTotalJobs] = useState(0);
     const [filter, setFilter] = useState('');
     const [sortQuery, setSortQuery] = useState('sort=-updatedAt');
 
     useEffect(() => {
-        fetchCompany();
+        fetchDashboardData();
     }, [current, pageSize, filter, sortQuery]);
 
-    const fetchCompany = async () => {
+    const fetchDashboardData = async () => {
         setIsLoading(true);
+
+        // Lấy tổng số công ty, người dùng và công việc
+        const [companyRes, userRes, jobRes] = await Promise.all([
+            callFetchCompany(''),
+            callFetchUser(''),
+            callFetchJob('')
+        ]);
+
+        if (companyRes && companyRes.data) {
+            setTotalCompanies(companyRes.data.meta.total);
+        }
+
+        if (userRes && userRes.data) {
+            setTotalUsers(userRes.data.meta.total);
+        }
+
+        if (jobRes && jobRes.data) {
+            setTotalJobs(jobRes.data.meta.total);
+        }
+
+        // Lấy thông tin công ty được hiển thị
         let query = `current=${current}&pageSize=${pageSize}`;
         if (filter) {
             query += `&${filter}`;
@@ -30,11 +53,11 @@ const DashboardPage = () => {
             query += `&${sortQuery}`;
         }
 
-        const res = await callFetchCompany(query);
-        if (res && res.data) {
-            setDisplayCompany(res.data.result);
-            setTotal(res.data.meta.total);
+        const displayCompanyRes = await callFetchCompany(query);
+        if (displayCompanyRes && displayCompanyRes.data) {
+            setDisplayCompany(displayCompanyRes.data.result);
         }
+
         setIsLoading(false);
     };
 
@@ -42,28 +65,35 @@ const DashboardPage = () => {
 
     const handlePageChange = (page: number, pageSize?: number) => {
         setCurrent(page);
-        // If you want to update pageSize as well, uncomment the line below:
-        // setPageSize(pageSize || 8);
+    };
+
+    const navigateToCompanyDetails = (companyId: string) => {
+        navigate(`/company/${companyId}`);
     };
 
     return (
         <div>
+            {/* Hiển thị tổng số công ty, người dùng và công việc */}
+            <Row gutter={[20, 20]} justify="center" style={{ marginBottom: '20px' }}>
+                <Col span={24} md={8}>
+                    <Card title="Tổng số công ty" bordered={false}>
+                        <Statistic title="Tổng số công ty" value={totalCompanies} formatter={formatter} />
+                    </Card>
+                </Col>
+                <Col span={24} md={8}>
+                    <Card title="Tổng số người dùng" bordered={false}>
+                        <Statistic title="Tổng số người dùng" value={totalUsers} formatter={formatter} />
+                    </Card>
+                </Col>
+                <Col span={24} md={8}>
+                    <Card title="Tổng số công việc" bordered={false}>
+                        <Statistic title="Tổng số công việc" value={totalJobs} formatter={formatter} />
+                    </Card>
+                </Col>
+            </Row>
+
+            {/* Hiển thị từng công ty */}
             <Row gutter={[20, 20]} justify="center">
-                <Col span={24} md={8}>
-                    <Card title="Card title" bordered={false}>
-                        <Statistic title="Active Users" value={112821} formatter={formatter} />
-                    </Card>
-                </Col>
-                <Col span={24} md={8}>
-                    <Card title="Card title" bordered={false}>
-                        <Statistic title="Active Users" value={112893} formatter={formatter} />
-                    </Card>
-                </Col>
-                <Col span={24} md={8}>
-                    <Card title="Card title" bordered={false}>
-                        <Statistic title="Active Users" value={112893} formatter={formatter} />
-                    </Card>
-                </Col>
                 {displayCompany?.map(item => (
                     <Col key={item._id} span={24} md={6}>
                         <Card
@@ -73,8 +103,10 @@ const DashboardPage = () => {
                                 flexDirection: 'column',
                                 alignItems: 'center',
                                 justifyContent: 'space-between',
+                                marginBottom: '20px', 
                             }}
                             hoverable
+                           
                         >
                             <div className={styles['card-customize']} style={{ flex: 1, display: 'flex', justifyContent: 'center', height: '200px' }}>
                                 <img
@@ -91,16 +123,18 @@ const DashboardPage = () => {
                     </Col>
                 ))}
             </Row>
+
+            {/* Phân trang */}
             <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '20px' }}>
                 <Pagination
                     current={current}
                     pageSize={pageSize}
-                    total={total}
+                    total={totalCompanies}
                     onChange={handlePageChange}
                     showSizeChanger
                     onShowSizeChange={(current, newSize) => setPageSize(newSize)}
                     showQuickJumper
-                    showTotal={(total, range) => `${range[0]}-${range[1]} of ${total} items`}
+                    showTotal={(total, range) => `${range[0]}-${range[1]} của ${total} mục`}
                 />
             </div>
         </div>
