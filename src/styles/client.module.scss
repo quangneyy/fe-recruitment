@@ -197,8 +197,11 @@
 
         .card-customize {
             height: 200px;
-            width: 200px;
+            width: 300px;
             margin: 20px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     }
 
@@ -304,14 +307,16 @@
         width: 100%;
         align-items: center;
     }
-
     .job-list-title {
         font-size: 24px;
         color: #333;
         font-weight: bold;
         margin-bottom: 10px;
-        margin-left: 300px;
-        padding-top: 300px;
+        margin-left: 310px;
+        padding-top: 200px; /* chinh chieu cao cua bang cong viec*/
+        font-family: 'Arial', sans-serif;
+         font-size: 20px;
+        
     }
     .job-list {
         padding-top: 0;
@@ -319,12 +324,15 @@
         overflow-y: auto; /* Tạo thanh cuộn khi nội dung vượt quá kích thước */
         margin-left: 300px;
         width:500px;
+        
       }
     .job-container {
-
+        
         padding-top: 0;
         padding-bottom: 20px; /* Đặt khoảng cách giữa mỗi công việc */
         background-color: #fff4e9; /* Đặt màu nền là màu vàng */
+        border-radius: 10px;
+        
       }
       .company-logo {
         max-width: 100px; // Điều chỉnh kích thước tối đa của logo
@@ -332,17 +340,29 @@
       }
       /* Trong tệp CSS của bạn hoặc sử dụng tệp CSS-in-JS */
     .red-border {
-        border: 1px solid #ffdfdf; /* Đây là viền màu đỏ */
-        margin: 10px; /* Thêm khoảng cách giữa các công việc nếu cần */
-    }
-    .company-info {
-        padding-top: 50px;
-        display: flex;
-        align-items: center;
-        /* Thiết lập hiển thị theo hàng ngang và căn giữa nội dung */
-    }
+    border: 1px solid #ffdfdf; /* Đây là viền màu đỏ */
+    margin: 10px; /* Thêm khoảng cách giữa các công việc nếu cần */
+}
+.company-info {
+    padding-top: 50px;
+    display: flex;
+    align-items: center;
+    /* Thiết lập hiển thị theo hàng ngang và căn giữa nội dung */
+}
 
-    .company-info img {
-        margin-right: 30px; /* Khoảng cách giữa logo và tên công ty */
-    }
+.company-info img {
+    margin-right: 30px; /* Khoảng cách giữa logo và tên công ty */
+}
+.job-container p {
+    text-indent: 30px; /* Điều chỉnh giá trị này theo nhu cầu của bạn */
+}
+.custom-font-style {
+    /* Định nghĩa các kiểu chữ tùy chỉnh của bạn ở đây */
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333; /* Chọn màu văn bản mong muốn của bạn */
+    /* Thêm bất kỳ kiểu chữ tùy chỉnh nào khác bạn muốn điều chỉnh */
+  }
+
 }

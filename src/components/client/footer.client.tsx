@@ -2,7 +2,7 @@ import React from 'react';
 import footerStyles from 'styles/footer.module.scss'; // Thay đổi đường dẫn tùy thuộc vào cách bạn tổ chức file của mình
 import { CiPhone } from "react-icons/ci";
 import { MdOutlineEmail } from "react-icons/md";
-// import { PiPaperPlaneTilt } from "react-icons/md";
+import { PiPaperPlaneTilt, } from "react-icons/pi";
 
 
 export default function App() {
@@ -16,7 +16,7 @@ export default function App() {
               <div className={footerStyles.linkBoxLink}><CiPhone /> Hồ Chí Minh: (+84) 977 460 519</div>
               <div className={footerStyles.linkBoxLink}><CiPhone /> Hà Nội: (+84) 983 131 351</div>
               <div className={footerStyles.linkBoxLink}><MdOutlineEmail /> Email: love@itviec.com</div>
-              {/* <div className={footerStyles.linkBoxLink}><PiPaperPlaneTilt /> Gửi thông tin liên hệ</div> */}
+              <div className={footerStyles.linkBoxLink}><PiPaperPlaneTilt /> Gửi thông tin liên hệ</div>
 
 
             </div>
