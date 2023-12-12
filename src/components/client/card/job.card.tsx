@@ -10,6 +10,7 @@ import styles from 'styles/client.module.scss';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 dayjs.extend(relativeTime)
+dayjs.locale('vi');
 
 interface IProps {
     showPagination?: boolean;

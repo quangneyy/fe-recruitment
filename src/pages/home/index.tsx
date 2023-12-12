@@ -3,6 +3,7 @@ import styles from 'styles/client.module.scss';
 import SearchClient from '@/components/client/search.client';
 import JobCard from '@/components/client/card/job.card';
 import CompanyCard from '@/components/client/card/company.card';
+import FeaturedArticles from '@/components/client/card/FeatureArticles';
 
 const HomePage = () => {
     return (
@@ -15,6 +16,8 @@ const HomePage = () => {
             <div style={{ margin: 50 }}></div>
             <Divider />
             <JobCard />
+            <Divider />
+            <FeaturedArticles />
         </div>
     )
 }
