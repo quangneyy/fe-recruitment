@@ -84,35 +84,33 @@
   border-radius: 5px;
   display: flex;
   align-items: center;
-  
-  
-
-  svg {
-    margin-top: 3px;
-    margin-right: 0px;
-    width: 0;
-  }
-
-  input {
-    flex: 1;
-    border: none;
-    padding: 5px;
-    font-size: 16px;
-    border-radius: 5px;
-    outline: none;
-    margin-right: 10px;
-    
-
-    &::placeholder {
-      font-size: 16px;
-    }
-  }
+  padding-left: 1px; /* Điều chỉnh giá trị tùy thuộc vào mức độ bạn muốn tăng chiều dài */
 }
 
+.inputBox svg {
+  margin-top: 3px;
+  margin-right: 0;
+  width: 0;
+}
+
+.inputBox input {
+  flex: 1;
+  border: none;
+  padding: 5px;
+  font-size: 20px;
+  border-radius: 7px;
+  outline: none;
+  margin-right: 1px;
+
+  &::placeholder {
+    font-size: 16px;
+  }
+}
 .subscribeButton {
-  margin-top: 20px;
+  margin-top: 10px;
   color: white;
   width: 100%;
+  min-width: 200px; /* Thêm thuộc tính minWidth để chỉnh chiều dài tối thiểu */
   text-align: center;
   background: linear-gradient(to right, #8bcdff, #6487ff);
   padding: 15px;
