@@ -26,6 +26,7 @@ const ModalUser = (props: IProps) => {
     const [roles, setRoles] = useState<ICompanySelect[]>([]);
 
     const [form] = Form.useForm();
+    
 
     useEffect(() => {
         if (dataInit?._id) {
@@ -49,7 +50,7 @@ const ModalUser = (props: IProps) => {
     }, [dataInit]);
 
     const submitUser = async (valuesForm: any) => {
-        const { name, email, password, address, age, gender, role, company } = valuesForm;
+        const { name, email, password, address, age, gender, role, company, balance } = valuesForm;
         if (dataInit?._id) {
             //update
             const user = {
@@ -60,6 +61,7 @@ const ModalUser = (props: IProps) => {
                 age,
                 gender,
                 address,
+                balance,
                 role: role.value,
                 company: {
                     _id: company.value,
@@ -87,6 +89,7 @@ const ModalUser = (props: IProps) => {
                 age,
                 gender,
                 address,
+                balance,
                 role: role.value,
                 company: {
                     _id: company.value,

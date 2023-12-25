@@ -28,13 +28,14 @@ const LoginPage = () => {
     const onFinish = async (values: any) => {
         const { username, password } = values;
         setIsSubmit(true);
-        const res = await callLogin(username, password);
+        const res = await callLogin(username, password); 
         setIsSubmit(false);
         if (res?.data) {
             localStorage.setItem('access_token', res.data.access_token);
             dispatch(setUserLoginInfo(res.data.user))
             message.success('Đăng nhập tài khoản thành công!');
             window.location.href = callback ? callback : '/';
+
         } else {
             notification.error({
                 message: "Có lỗi xảy ra",

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CodeOutlined, ContactsOutlined, DashOutlined, LogoutOutlined, MenuFoldOutlined, RiseOutlined, TwitterOutlined } from '@ant-design/icons';
 import { Avatar, Drawer, Dropdown, MenuProps, Space, message } from 'antd';
 import { Menu, ConfigProvider } from 'antd';
@@ -27,7 +27,7 @@ const Header = (props: any) => {
 
     useEffect(() => {
         setCurrent(location.pathname);
-    }, [location])
+    }, [location]);
 
     const items: MenuProps['items'] = [
         {
@@ -47,8 +47,6 @@ const Header = (props: any) => {
         }
     ];
 
-
-
     const onClick: MenuProps['onClick'] = (e) => {
         setCurrent(e.key);
     };
@@ -60,14 +58,18 @@ const Header = (props: any) => {
             message.success('Đăng xuất thành công');
             navigate('/')
         }
-    }
+    };
 
     const itemsDropdown = [
         {
-            label: <label
-                style={{ cursor: 'pointer' }}
-                onClick={() => setOpenManageAccount(true)}
-            >Quản lý tài khoản</label>,
+            label: (
+                <label
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => setOpenManageAccount(true)}
+                >
+                    Quản lý tài khoản
+                </label>
+            ),
             key: 'manage-account',
             icon: <ContactsOutlined />
         },
@@ -79,10 +81,14 @@ const Header = (props: any) => {
             icon: <DashOutlined />
         },
         {
-            label: <label
-                style={{ cursor: 'pointer' }}
-                onClick={() => handleLogout()}
-            >Đăng xuất</label>,
+            label: (
+                <label
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => handleLogout()}
+                >
+                    Đăng xuất
+                </label>
+            ),
             key: 'logout',
             icon: <LogoutOutlined />
         },
@@ -94,7 +100,7 @@ const Header = (props: any) => {
         <>
             <div className={styles["header-section"]}>
                 <div className={styles["container"]}>
-                    {!isMobile ?
+                    {!isMobile ? (
                         <div style={{ display: "flex", gap: 30 }}>
                             <div className={styles['brand']} >
                                 <FaReact onClick={() => navigate('/')} title='Hỏi Dân IT' />
@@ -109,36 +115,32 @@ const Header = (props: any) => {
                                         },
                                     }}
                                 >
-
                                     <Menu
-                                        // onClick={onClick}
                                         selectedKeys={[current]}
                                         mode="horizontal"
                                         items={items}
                                     />
                                 </ConfigProvider>
                                 <div className={styles['extra']}>
-                                    {isAuthenticated === false ?
+                                    {isAuthenticated === false ? (
                                         <Link to={'/login'}>Đăng Nhập</Link>
-                                        :
+                                    ) : (
                                         <Dropdown menu={{ items: itemsDropdown }} trigger={['click']}>
                                             <Space style={{ cursor: "pointer" }}>
                                                 <span>Welcome {user?.name}</span>
                                                 <Avatar> {user?.name?.substring(0, 2)?.toUpperCase()} </Avatar>
                                             </Space>
                                         </Dropdown>
-                                    }
-
+                                    )}
                                 </div>
-
                             </div>
                         </div>
-                        :
+                    ) : (
                         <div className={styles['header-mobile']}>
                             <span>Your APP</span>
                             <MenuFoldOutlined onClick={() => setOpenMobileMenu(true)} />
                         </div>
-                    }
+                    )}
                 </div>
             </div>
             <Drawer title="Chức năng"

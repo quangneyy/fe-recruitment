@@ -32,6 +32,14 @@ export interface IAccount {
             method: string;
             module: string;
         }[]
+        balance: number; // Thêm trường "balance"
+        age?: number;
+        gender?: string;
+        address?: string;
+        company?: {
+            _id: string;
+            name: string;
+        }
     }
 }
 
@@ -54,12 +62,13 @@ export interface ICompany {
 
 export interface IUser {
     _id?: string;
-    name: string;
-    email: string;
+    name?: string;
+    email?: string;
     password?: string;
-    age: number;
-    gender: string;
-    address: string;
+    age?: number;
+    gender?: string;
+    address?: string;
+    balance?: number;
     role?: {
         _id: string;
         name: string;

@@ -114,6 +114,10 @@ export const callFetchJobById = (id: string) => {
     return axios.get<IBackendRes<IJob>>(`/api/v1/jobs/${id}`);
 }
 
+
+export const callDeductBalance = (amount: number) => {
+    return axios.post<IBackendRes<number>>('/api/v1/balance/deduct', { amount });
+};
 /**
  * 
 Module Resume

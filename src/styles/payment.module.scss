@@ -37,4 +37,54 @@
   text-align: center;
 }
 
-/* Add more styles as needed */
+/* payment.module.scss */
+
+/* payment.module.scss */
+
+.payment-form {
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  text-align: center;
+  font-size: 1.5em;
+  margin-bottom: 20px;
+}
+
+.amount-options {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.amount-options label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.amount-options input {
+  margin-right: 10px;
+}
+
+.payment-button {
+  padding: 15px 30px;
+  font-size: 18px;
+  background-color: #4CAF50;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+.payment-button:hover {
+  background-color: #45a049;
+}
+

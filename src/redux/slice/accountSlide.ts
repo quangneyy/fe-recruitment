@@ -1,7 +1,7 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { $CombinedState, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { callFetchAccount } from '@/config/api';
 
-// First, create the thunk
+// Đầu tiên, tạo thunk
 export const fetchAccount = createAsyncThunk(
     'account/fetchAccount',
     async () => {
@@ -10,30 +10,36 @@ export const fetchAccount = createAsyncThunk(
     }
 )
 
+// Cập nhật định nghĩa cho đối tượng người dùng
+interface IUser {
+    _id: string;
+    email: string;
+    name: string;
+    role: {
+        _id: string;
+        name: string;
+    };
+    permissions: {
+        _id: string;
+        name: string;
+        apiPath: string;
+        method: string;
+        module: string;
+    }[];
+    balance: number; // Thêm thuộc tính 'balance'
+}
+
+// Cập nhật giao diện IState để sử dụng IUser
 interface IState {
     isAuthenticated: boolean;
     isLoading: boolean;
     isRefreshToken: boolean;
     errorRefreshToken: string;
-    user: {
-        _id: string;
-        email: string;
-        name: string;
-        role: {
-            _id: string;
-            name: string;
-        }
-        permissions: {
-            _id: string;
-            name: string;
-            apiPath: string;
-            method: string;
-            module: string;
-        }[]
-    };
+    user: IUser;
     activeMenu: string;
 }
 
+// Khởi tạo trạng thái ban đầu
 const initialState: IState = {
     isAuthenticated: false,
     isLoading: true,
@@ -48,18 +54,17 @@ const initialState: IState = {
             name: "",
         },
         permissions: [],
+        balance: 0,
     },
-
     activeMenu: 'home'
 };
 
-
+// Khởi tạo slide
 export const accountSlide = createSlice({
     name: 'account',
     initialState,
-    // The `reducers` field lets us define reducers and generate associated actions
+    // Các reducers để định nghĩa hành động và tạo các hành động liên quan
     reducers: {
-        // Use the PayloadAction type to declare the contents of `action.payload`
         setActiveMenu: (state, action) => {
             state.activeMenu = action.payload;
         },
@@ -71,6 +76,7 @@ export const accountSlide = createSlice({
             state.user.name = action.payload.name;
             state.user.role = action?.payload?.role;
             state.user.permissions = action?.payload?.permissions;
+            state.user.balance = action?.payload?.balance || 0;
         },
         setLogoutAction: (state, action) => {
             localStorage.removeItem('access_token');
@@ -84,16 +90,16 @@ export const accountSlide = createSlice({
                     name: "",
                 },
                 permissions: [],
+                balance: 0,
             }
         },
         setRefreshTokenAction: (state, action) => {
             state.isRefreshToken = action.payload?.status ?? false;
             state.errorRefreshToken = action.payload?.message ?? "";
         }
-
     },
     extraReducers: (builder) => {
-        // Add reducers for additional action types here, and handle loading state as needed
+        // Xử lý các trạng thái bổ sung cho các loại hành động ở đây
         builder.addCase(fetchAccount.pending, (state, action) => {
             if (action.payload) {
                 state.isAuthenticated = false;
@@ -110,6 +116,7 @@ export const accountSlide = createSlice({
                 state.user.name = action.payload.user?.name;
                 state.user.role = action?.payload?.user?.role;
                 state.user.permissions = action?.payload?.user?.permissions;
+                state.user.balance = action?.payload?.user?.balance || 0;
             }
         })
 
@@ -119,13 +126,11 @@ export const accountSlide = createSlice({
                 state.isLoading = false;
             }
         })
-
     },
-
 });
 
 export const {
-    setActiveMenu, setUserLoginInfo, setLogoutAction, setRefreshTokenAction
+    setActiveMenu, setUserLoginInfo, setLogoutAction, setRefreshTokenAction, 
 } = accountSlide.actions;
 
 export default accountSlide.reducer;
