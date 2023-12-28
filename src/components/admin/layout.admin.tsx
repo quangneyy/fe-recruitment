@@ -16,12 +16,13 @@ import {
 } from '@ant-design/icons';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { callLogout } from 'config/api';
+import { callLogout, callFetchAccount } from 'config/api';  // Import callFetchAccount
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { isMobile } from 'react-device-detect';
 import type { MenuProps } from 'antd';
 import { setLogoutAction } from '@/redux/slice/accountSlide';
 import { ALL_PERMISSIONS } from '@/config/permissions';
+
 
 const { Content, Footer, Sider } = Layout;
 
@@ -38,6 +39,7 @@ const LayoutAdmin = () => {
 
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
+    
 
     useEffect(() => {
         if (permissions?.length) {

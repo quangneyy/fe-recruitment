@@ -24,9 +24,10 @@ const PaymentPaySuccess: React.FC = (res) => {
 
                 if (resultCode === '0' && amount !== null) {
                     const deductionAmount = parseInt(amount);
-                    const updatedBalance = user?.balance ? user.balance - deductionAmount : 0;
+                    const updatedBalance = user?.balance ? user.balance + deductionAmount : 0;
 
                     const userUpdate = {
+                        ...user,
                         _id: user?._id,
                         balance: updatedBalance,
                     };
