@@ -11,6 +11,8 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { callLogout } from '@/config/api';
 import { setLogoutAction } from '@/redux/slice/accountSlide';
 import ManageAccount from './modal/manage.account';
+import React from 'react';
+
 
 const Header = (props: any) => {
     const navigate = useNavigate();
@@ -96,9 +98,18 @@ const Header = (props: any) => {
                 <div className={styles["container"]}>
                     {!isMobile ?
                         <div style={{ display: "flex", gap: 30 }}>
-                            <div className={styles['brand']} >
-                                <FaReact onClick={() => navigate('/')} title='Hỏi Dân IT' />
-                            </div>
+                        <div className={styles['brand']} onClick={() => navigate('/')}>
+                        <div className={styles['brand']} onClick={() => navigate('/')}>
+            <div className={styles['brand']}>
+                <img
+                    src="src\styles\icon22.png"
+                    alt="Your Logo Alt Text"
+                    title='Hỏi Dân IT'
+                    style={{ width: '50px', height: '50px' }} // Thay đổi kích thước theo ý muốn
+                />
+            </div>
+        </div>
+        </div>
                             <div className={styles['top-menu']}>
                                 <ConfigProvider
                                     theme={{
